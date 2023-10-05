@@ -1,12 +1,14 @@
 package edu.greenriver.sdev.jokesapi.services;
 
 import edu.greenriver.sdev.jokesapi.model.Joke;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+@Service
 public class JokeService
 {
     private List<Joke> jokes = new ArrayList<>(List.of(
