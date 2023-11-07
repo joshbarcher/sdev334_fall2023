@@ -71,13 +71,23 @@ public class MyGraph<V, E> implements IGraph<V, E>
     @Override
     public boolean containsVertex(V vertex)
     {
-        return false;
+        return lists.containsKey(vertex);
     }
 
     @Override
     public boolean containsEdge(V first, V second)
     {
-        return false;
+        //make sure the vertices exist
+        if (!containsVertex(first) || !containsVertex(second))
+        {
+            return false;
+        }
+
+        //look up the edge in one of the adjacency lists
+        LinkedList<Edge<V, E>> adjacents = lists.get(first);
+        Edge<V, E> lookUp = new Edge<>(first, second, null, 0);
+
+        return adjacents.contains(lookUp);
     }
 
     @Override
