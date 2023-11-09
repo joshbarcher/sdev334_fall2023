@@ -38,4 +38,8 @@ public interface IGraph<V, E>
 
     //updating elements
     boolean setVertex(V oldValue, V newValue);
+
+    //traversals
+    List<V> dfs(V source);
+    List<V> bfs(V source);
 }

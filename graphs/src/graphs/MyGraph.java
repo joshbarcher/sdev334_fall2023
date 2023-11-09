@@ -3,10 +3,7 @@ package graphs;
 import adts.IGraph;
 import graph_helpers.Edge;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is an undirected, weighted graph!
@@ -124,5 +121,42 @@ public class MyGraph<V, E> implements IGraph<V, E>
     public boolean setVertex(V oldValue, V newValue)
     {
         return false;
+    }
+
+    @Override
+    public List<V> dfs(V source)
+    {
+        Set<V> visit = new HashSet<>();
+        List<V> traversal = new ArrayList<>();
+
+        //begin the traversal
+        dfsRecursive(source, visit, traversal);
+
+        return traversal;
+    }
+
+    private void dfsRecursive(V current, Set<V> visited, List<V> traversal)
+    {
+        if (!visited.contains(current))
+        {
+            //visit this vertex
+            visited.add(current);
+            traversal.add(current);
+
+            //go to neighbor vertices
+            List<Edge<V, E>> adjacents = lists.get(current);
+            for (int i = 0; i < adjacents.size(); i++)
+            {
+                Edge<V, E> edge = adjacents.get(i);
+                V other = edge.getFirst().equals(current) ? edge.getSecond() : edge.getFirst();
+                dfsRecursive(other, visited, traversal);
+            }
+        }
+    }
+
+    @Override
+    public List<V> bfs(V source)
+    {
+        return null;
     }
 }
